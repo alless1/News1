@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.alless.news.MainActivity;
 import com.alless.news.R;
 import com.alless.news.utils.ShareUtils;
+import com.viewpagerindicator.CirclePageIndicator;
 
 /**
  * Created by Administrator on 2017/3/16.
@@ -21,6 +22,7 @@ public class Tutorial extends BaseActivity implements View.OnClickListener {
     private ViewPager mPager;
     private int[] mImageIds = {R.mipmap.guide_1,R.mipmap.guide_2,R.mipmap.guide_3};
     private Button mButton;
+    private CirclePageIndicator mIndicator;
 
     @Override
     public int getLayoutId() {
@@ -31,7 +33,10 @@ public class Tutorial extends BaseActivity implements View.OnClickListener {
     public void init() {
         mPager = (ViewPager) findViewById(R.id.viewpager);
         mButton = (Button) findViewById(R.id.btn_enter);
+        mIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
         mPager.setAdapter(mAdapter);
+        //关联开源ViewPagerIndicator
+        mIndicator.setViewPager(mPager);
         mPager.addOnPageChangeListener(mPageChangeListener);
         mButton.setOnClickListener(this);
     }
