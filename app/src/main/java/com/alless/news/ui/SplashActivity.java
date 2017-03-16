@@ -1,5 +1,6 @@
 package com.alless.news.ui;
 
+import android.content.Intent;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -8,7 +9,9 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
+import com.alless.news.MainActivity;
 import com.alless.news.R;
+import com.alless.news.utils.ShareUtils;
 
 /**
  * Created by Administrator on 2017/3/16.
@@ -39,6 +42,29 @@ public class SplashActivity extends BaseActivity {
         set.addAnimation(sAnima);
         set.addAnimation(aAnima);
         set.setDuration(2000);
+        set.setAnimationListener(mListener);
         v.startAnimation(set);
+
     }
+    private Animation.AnimationListener mListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            if(ShareUtils.getBoolean(SplashActivity.this,"tutorialEnd")){
+                startActivity(new Intent(SplashActivity.this,MainActivity.class));
+            }else{
+                startActivity(new Intent(SplashActivity.this,Tutorial.class));
+            }
+            finish();
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+    };
 }
