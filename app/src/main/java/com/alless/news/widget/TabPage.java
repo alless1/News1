@@ -2,7 +2,9 @@ package com.alless.news.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -22,6 +24,9 @@ public class TabPage extends RelativeLayout {
     TextView mTitle;
     @BindView(R.id.menu)
     ImageView mMenu;
+    private static final String TAG = "TabPage";
+    @BindView(R.id.tab_frame)
+    FrameLayout mTabFrameLayout;
     private OnTabPageChangeListener mOnTabPageChangeListener;
 
     public TabPage(Context context) {
@@ -48,6 +53,16 @@ public class TabPage extends RelativeLayout {
 
     public void setTitle(String title) {
         mTitle.setText(title);
+
+    }
+
+    /**
+     * 左侧菜单选项切换事件, 让子类去实现
+     *
+     * @param position 切换的位置
+     */
+    public void onMenuSwitch(int position) {
+        Log.d(TAG, "onMenuSwitch: " + position);
 
     }
 

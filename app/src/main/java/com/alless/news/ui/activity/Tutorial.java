@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.alless.news.MainActivity;
 import com.alless.news.R;
 import com.alless.news.utils.ShareUtils;
 import com.viewpagerindicator.CirclePageIndicator;

@@ -5,18 +5,19 @@
              android:id="@+id/content_frame"
               android:orientation="vertical"
             >
-<!--    <FrameLayout
+    <FrameLayout
         android:id="@+id/tab_page_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        ></FrameLayout>-->
-    <com.alless.news.widget.TabPage
+        >
+  <!--  <com.alless.news.widget.TabPage
         android:id="@+id/tabpage_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4">
-    </com.alless.news.widget.TabPage>
+    </com.alless.news.widget.TabPage>-->
+    </FrameLayout>
     <RadioGroup
         android:id="@+id/tabs_container"
         android:layout_width="match_parent"

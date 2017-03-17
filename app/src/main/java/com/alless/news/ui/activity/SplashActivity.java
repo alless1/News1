@@ -9,7 +9,6 @@ import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
-import com.alless.news.MainActivity;
 import com.alless.news.R;
 import com.alless.news.utils.ShareUtils;
 
