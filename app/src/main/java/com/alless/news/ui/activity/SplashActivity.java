@@ -1,4 +1,4 @@
-package com.alless.news.ui;
+package com.alless.news.ui.activity;
 
 import android.content.Intent;
 import android.view.View;
