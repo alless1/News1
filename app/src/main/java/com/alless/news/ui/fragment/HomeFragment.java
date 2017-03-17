@@ -1,9 +1,6 @@
 package com.alless.news.ui.fragment;
 
-import android.util.SparseArray;
-import android.widget.FrameLayout;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.alless.news.R;
 import com.alless.news.widget.TabPage;
@@ -17,11 +14,13 @@ import butterknife.BindView;
 public class HomeFragment extends BaseFragment {
 
 
-    @BindView(R.id.tab_page_container)
-    FrameLayout mTabPageContainer;
+   /* @BindView(R.id.tab_page_container)
+    FrameLayout mTabPageContainer;*/
     @BindView(R.id.tabs_container)
     RadioGroup mRadioGroup;
-    private SparseArray<TabPage> mTabPageCache = new SparseArray<>();
+    @BindView(R.id.tabpage_view)
+    TabPage mTabPageView;
+   // private SparseArray<TabPage> mTabPageCache = new SparseArray<>();
 
     @Override
     public int getLayoutResId() {
@@ -31,12 +30,21 @@ public class HomeFragment extends BaseFragment {
     @Override
     protected void init() {
         super.init();
+
+        //设置menu的点击事件
+        mTabPageView.setOnTabPageChangeListener(new TabPage.OnTabPageChangeListener() {
+            @Override
+            public void onTabPageMenuClick() {
+                //双层回调,由table里面监听的事件传到homefragment,再传出去.
+                mOnHomeChangeListener.onTabPageMenuClick();
+            }
+        });
         //设置radio group点击事件
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 //查找内存缓存中有没有缓存TabPage, 如果有则使用缓存的TabPage，没有就创建一个
-                TabPage tabPage = null;
+     /*           TabPage tabPage = null;
                 if (mTabPageCache.get(checkedId) != null) {
                     tabPage = mTabPageCache.get(checkedId);
 //                  //  Log.d(TAG, "从缓存中获取TabPage");
@@ -44,10 +52,32 @@ public class HomeFragment extends BaseFragment {
                 } else {
                     //创建新的TabPage
                     tabPage = createTabPage(checkedId);
-                }
+                }*/
                 //移除原来FrameLayout里面的所有TabPage
-                mTabPageContainer.removeAllViews();
-                mTabPageContainer.addView(tabPage);
+               /* mTabPageContainer.removeAllViews();
+                mTabPageContainer.addView(tabPage);*/
+                switch (checkedId) {
+                    case R.id.tab_home:
+                        mTabPageView.hideMenu();
+                        mTabPageView.setTitle("首页");
+                        break;
+                    case R.id.tab_news_center:
+                        mTabPageView.showMenu();
+                        mTabPageView.setTitle("新闻中心");
+                        break;
+                    case R.id.tab_smart_service:
+                        mTabPageView.showMenu();
+                        mTabPageView.setTitle("智慧服务");
+                        break;
+                    case R.id.tab_gov_affairs:
+                        mTabPageView.showMenu();
+                        mTabPageView.setTitle("政务");
+                        break;
+                    case R.id.tab_settings:
+                        mTabPageView.hideMenu();
+                        mTabPageView.setTitle("设置中心");
+                        break;
+                }
 
                 //通知外界发生切换事件
                 if (mOnHomeChangeListener != null) {
@@ -59,7 +89,7 @@ public class HomeFragment extends BaseFragment {
         mRadioGroup.check(R.id.tab_home);
     }
 
-    private TabPage createTabPage(int checkedId) {
+/*    private TabPage createTabPage(int checkedId) {
         //添加TabPage到FrameLayout里面
         TabPage tabPage = new TabPage(getContext());
         //首页和设置中心没有标题栏的菜单按钮
@@ -83,7 +113,7 @@ public class HomeFragment extends BaseFragment {
                 break;
         }
         //创建一个新的TabPage保存到内存缓存
-        mTabPageCache.put(checkedId, tabPage);
+      //  mTabPageCache.put(checkedId, tabPage);
 //        Toast.makeText(getContext(), "创建新的TabPage", Toast.LENGTH_SHORT).show();
 //                    Log.d(TAG, "创建新的TabPage");
 
@@ -101,9 +131,11 @@ public class HomeFragment extends BaseFragment {
 
         return tabPage;
 
-    }
+    }*/
 
     private OnHomeChangeListener mOnHomeChangeListener;
+
+
     /**
      * 通知外界发生tab按钮的切换
      */
@@ -111,6 +143,7 @@ public class HomeFragment extends BaseFragment {
 
         /**
          * tab按钮切换的回调
+         *
          * @param checkId 切换到radio button的id
          */
         void onTabSwitch(int checkId);

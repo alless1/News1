@@ -11,17 +11,19 @@ import com.alless.news.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Administrator on 2017/3/17.
  */
 
 public class TabPage extends RelativeLayout {
-    @BindView(R.id.menu)
-    ImageView mMenu;
     @BindView(R.id.title)
     TextView mTitle;
+    @BindView(R.id.menu)
+    ImageView mMenu;
     private OnTabPageChangeListener mOnTabPageChangeListener;
+
     public TabPage(Context context) {
         this(context, null);
     }
@@ -40,10 +42,22 @@ public class TabPage extends RelativeLayout {
         mMenu.setVisibility(View.GONE);
     }
 
+    public void showMenu() {
+        mMenu.setVisibility(View.VISIBLE);
+    }
+
     public void setTitle(String title) {
         mTitle.setText(title);
 
     }
+
+    @OnClick(R.id.menu)
+    public void onClick() {
+        //通知外界menu被点击了
+        if (mOnTabPageChangeListener != null)
+            mOnTabPageChangeListener.onTabPageMenuClick();
+    }
+
     /**
      * 通知外界TabPage里面发生变化
      */

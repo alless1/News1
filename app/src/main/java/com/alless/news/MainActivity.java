@@ -2,13 +2,14 @@ package com.alless.news;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import com.alless.news.ui.fragment.HomeFragment;
 import com.alless.news.ui.fragment.MenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
-public class MainActivity extends SlidingFragmentActivity {
+public class MainActivity extends SlidingFragmentActivity implements HomeFragment.OnHomeChangeListener {
 
     private MenuFragment mMenuFragment;
     private HomeFragment mHomeFragment;
@@ -21,7 +22,10 @@ public class MainActivity extends SlidingFragmentActivity {
         initLeftMenu();
         initContent();
         initSlidingMenu();
+        init();
     }
+
+
 
     /**
      * 初始化左边菜单布局
@@ -58,5 +62,16 @@ public class MainActivity extends SlidingFragmentActivity {
         sm.setMode(SlidingMenu.LEFT);//只从左边拉出侧滑菜单
     }
 
+    private void init() {
+        mHomeFragment.setOnHomeChangeListener(this);
+    }
+    @Override
+    public void onTabSwitch(int checkId) {
+        Toast.makeText(this,"radio选择了"+checkId,Toast.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void onTabPageMenuClick() {
+        Toast.makeText(this,"menu被点击了",Toast.LENGTH_SHORT).show();
+    }
 }
