@@ -9,7 +9,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/appNews" />
+            <option value="$PROJECT_DIR$/demovolley" />
+            <option value="$PROJECT_DIR$/eventbusdemo" />
+            <option value="$PROJECT_DIR$/myindicator" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
